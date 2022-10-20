@@ -7,8 +7,9 @@ public class ProjectileFireball : MonoBehaviour
     public Vector3 direction;
     public Collider shooter;
     public float speed;
-    private float maxTime = 10;
+    public ParticleSystem explosionFX;
 
+    private float maxTime = 10;
     private float radius = 3.0f;
     private float power = 150f;
     
@@ -34,7 +35,9 @@ public class ProjectileFireball : MonoBehaviour
         if (c.gameObject.tag != "PlayerProjectile" && c.gameObject.tag != "Player")
         {
             Vector3 explosionPos = transform.position;
-            
+            GameObject.Instantiate<ParticleSystem>(explosionFX, explosionPos, transform.rotation);
+            Physics.IgnoreCollision(shooter, GetComponent<Collider>(), false);
+
             Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
             foreach (Collider hit in colliders)
             {
