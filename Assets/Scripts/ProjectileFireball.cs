@@ -5,13 +5,17 @@ using UnityEngine;
 public class ProjectileFireball : MonoBehaviour
 {
     public Vector3 direction;
-    public float speed = 30;
+    public Collider shooter;
+    public float speed;
     private float maxTime = 10;
+
+    private float radius = 3.0f;
+    private float power = 150f;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        Physics.IgnoreCollision(shooter, GetComponent<Collider>());
     }
 
     // Update is called once per frame
@@ -22,14 +26,26 @@ public class ProjectileFireball : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
         transform.position += speed * direction * Time.deltaTime;
-        Debug.Log(transform.position);
         maxTime -= Time.deltaTime;
     }
 
     void OnCollisionEnter (Collision c)
     {
-        if (c.gameObject.tag != "Bullet" && c.gameObject.tag != "Player")
+        if (c.gameObject.tag != "PlayerProjectile" && c.gameObject.tag != "Player")
         {
+            Vector3 explosionPos = transform.position;
+            
+            Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+            foreach (Collider hit in colliders)
+            {
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    rb.AddExplosionForce(power, explosionPos, radius, 1.5f);
+                }
+            }
+
             GameObject.Destroy(gameObject);
         }
     }

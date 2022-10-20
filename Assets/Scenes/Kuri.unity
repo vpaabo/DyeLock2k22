@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 165900201}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 2101413958}
   prefabFireball: {fileID: 6701596848169493444, guid: 997f5bfc6618c664aa9dc7d30c2933ab, type: 3}
+  shotIntervalMax: 0.5
 --- !u!1001 &312635277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -509,6 +510,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 4135013735497603873}
+    - target: {fileID: 8762286023885395323, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
 --- !u!4 &1225419409 stripped
@@ -602,7 +607,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 500
-  field of view: 40
+  field of view: 80
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -772,6 +777,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2483777283207436233, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
       propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5815538042571328693, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5815538042571328695, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7400315220007371289, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
