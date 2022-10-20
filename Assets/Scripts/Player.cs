@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     {
         Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         Vector3 direction = Vector3.Normalize(ray.GetPoint(1) - playerCam.transform.position);
-        ProjectileLightningBolt bolt = GameObject.Instantiate<ProjectileLightningBolt>(prefabLightningBolt, playerCam.transform.position - new Vector3(0, 0.25f, 0), transform.rotation);
+        ProjectileLightningBolt bolt = GameObject.Instantiate<ProjectileLightningBolt>(prefabLightningBolt, playerCam.transform.position - new Vector3(0, 0.25f, 0) + direction, transform.rotation);
         bolt.direction = direction;
         bolt.speed = 50;
         bolt.shooter = gameObject.GetComponentInChildren<Collider>();
