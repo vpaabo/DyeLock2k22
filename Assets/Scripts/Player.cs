@@ -5,37 +5,81 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Camera playerCam;
+    
+
+    public List<Spell> spells; // = new List<Spell>()
+
     public ProjectileFireball prefabFireball;
     public ProjectileLightningBolt prefabLightningBolt;
-    
+
+    private Spell SelectedSpell;
+    private int SpellCounter = 0;
+
     private int resourceRed = 0;
     private int resourceGreen = 0;
     private int resourceBlue = 0;
 
     public float shotIntervalMax = 0.5f;
     private float shotIntervalCurrent;
-    
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        Events.OnSpellSelected += OnSpellSelected;
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnSpellSelected -= OnSpellSelected;
+    }
+
     void Start()
     {
         shotIntervalCurrent = -1;
+        SelectedSpell = spells[SpellCounter];
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+
+        if (Input.mouseScrollDelta != Vector2.zero)
+        {
+            print(Input.mouseScrollDelta);
+
+            int nextSpell= (int) Input.mouseScrollDelta.y;
+            SpellCounter = (Mathf.Abs(SpellCounter + nextSpell)) % spells.Count;
+            Events.SelectSpell(SpellCounter);
+
+            print("selected spell" + SpellCounter + SelectedSpell.gameObject.name);
+        }
         if (Input.GetMouseButton(0) && shotIntervalCurrent <= 0)
         {
-            shootFireball();
+            shootSpell();
             shotIntervalCurrent = shotIntervalMax;
-        } else if (Input.GetMouseButton(1) && shotIntervalCurrent <= 0)
+        }
+        /*else if (Input.GetMouseButton(1) && shotIntervalCurrent <= 0)
         {
             shootLightningBolt();
             shotIntervalCurrent = shotIntervalMax;
-        } else
+        } */
+        else
         {
             shotIntervalCurrent -= Time.deltaTime;
         }
+    }
+
+    void OnSpellSelected(int n)
+    {
+        SelectedSpell = spells[SpellCounter];
+    }
+    void shootSpell()
+    {
+        Ray ray = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Vector3 direction = Vector3.Normalize(ray.GetPoint(1) - playerCam.transform.position);
+        Spell spell = GameObject.Instantiate<Spell>(SelectedSpell, playerCam.transform.position - new Vector3(0, 0.25f, 0) + direction, transform.rotation);
+        spell.direction = direction;
+        spell.speed = SelectedSpell.speed;
+        spell.shooter = gameObject.GetComponentInChildren<Collider>();
     }
 
     void shootFireball()

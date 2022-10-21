@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileLightningBolt : Spell
+public class Spell : MonoBehaviour
 {
+    public Vector3 direction;
+    public Collider shooter;
+    public float speed;
 
-    
-    // IN PARENT CLASS
+    protected float maxTime = 10;
 
-    /*void Start()
+    void Start()
     {
         Physics.IgnoreCollision(shooter, GetComponent<Collider>());
-    }*/
-    /*void Update()
+    }
+
+    void Update()
     {
         if (maxTime <= 0)
         {
@@ -20,13 +23,5 @@ public class ProjectileLightningBolt : Spell
         }
         transform.position += speed * direction * Time.deltaTime;
         maxTime -= Time.deltaTime;
-    }*/
-
-    void OnCollisionEnter(Collision c)
-    {
-        if (c.gameObject.tag != "PlayerProjectile" && c.gameObject.tag != "Player")
-        {
-            GameObject.Destroy(gameObject);
-        }
     }
 }
