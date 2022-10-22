@@ -47,7 +47,14 @@ public class Player : MonoBehaviour
             print(Input.mouseScrollDelta);
 
             int nextSpell= (int) Input.mouseScrollDelta.y;
-            SpellCounter = (Mathf.Abs(SpellCounter + nextSpell)) % spells.Count;
+            if (nextSpell >= 0)
+            {
+                SpellCounter = (SpellCounter + nextSpell) % spells.Count;
+            } else
+            {
+                SpellCounter = (SpellCounter + Mathf.Abs(nextSpell-1)) % spells.Count;
+            }
+            
             Events.SelectSpell(SpellCounter);
 
             print("selected spell" + SpellCounter + SelectedSpell.gameObject.name);

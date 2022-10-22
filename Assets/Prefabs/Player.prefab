@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 0}
+  spells:
+  - {fileID: 6701596848169493444, guid: 997f5bfc6618c664aa9dc7d30c2933ab, type: 3}
+  - {fileID: 1491620386155156329, guid: c4237f291576ff6448598e5fd8369ade, type: 3}
+  - {fileID: 7642225154042201166, guid: 8ebd4462381a3b84da7cbeba56dc03bf, type: 3}
   prefabFireball: {fileID: 6701596848169493444, guid: 997f5bfc6618c664aa9dc7d30c2933ab, type: 3}
   prefabLightningBolt: {fileID: 1491620386155156329, guid: c4237f291576ff6448598e5fd8369ade, type: 3}
   shotIntervalMax: 0.5

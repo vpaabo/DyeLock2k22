@@ -27,7 +27,17 @@ public class EnemyExampleAI : MonoBehaviour
         if (c.gameObject.tag == "PlayerProjectile" || c.gameObject.tag == "Player")
         {
             Debug.Log("Enemy hit!");
-            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Rigidbody>().isKinematic = false; // Also checked to false in projectile hit code, enables external forces to affect the enemy
+            navMeshAgent.enabled = false;
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.tag == "PlayerProjectile" || other.tag == "Player")
+        {
+            Debug.Log("Enemy hit!");
+            GetComponent<Rigidbody>().isKinematic = false; // Also checked to false in projectile hit code, enables external forces to affect the enemy
             navMeshAgent.enabled = false;
         }
     }

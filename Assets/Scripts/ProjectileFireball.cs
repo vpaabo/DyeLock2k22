@@ -27,6 +27,11 @@ public class ProjectileFireball : Spell
 
                 if (rb != null)
                 {
+                    if (hit.gameObject.tag == "Enemy")
+                    {
+                        rb.isKinematic = false; // Enables enemy to be affected by external forces
+                    }
+
                     rb.AddExplosionForce(power, explosionPos, radius, 1.5f);
                 }
             }
