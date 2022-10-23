@@ -7,10 +7,15 @@ public class EnemyExampleAI : MonoBehaviour
 {
     public GameObject movementTarget;
     private NavMeshAgent navMeshAgent;
+    [Tooltip("The object containing the model. Used in despawn scaling.")]
+    public GameObject model;
+    private float despawnTimer = 3;
+    private float despawnMod = 0;
+
 
     private void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -19,6 +24,20 @@ public class EnemyExampleAI : MonoBehaviour
         if (navMeshAgent.isActiveAndEnabled)
         {
             navMeshAgent.destination = movementTarget.transform.position;
+        } else
+        {
+            if (despawnTimer <= 0)
+            {
+                model.transform.localScale -= despawnMod * new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
+                despawnMod += Time.deltaTime;
+                if (model.transform.localScale.x <= 0.05f)
+                {
+                    GameObject.Destroy(gameObject);
+                }
+            } else
+            {
+                despawnTimer -= Time.deltaTime;
+            }
         }
     }
 
@@ -26,9 +45,7 @@ public class EnemyExampleAI : MonoBehaviour
     {
         if (c.gameObject.tag == "PlayerProjectile" || c.gameObject.tag == "Player")
         {
-            Debug.Log("Enemy hit!");
-            GetComponent<Rigidbody>().isKinematic = false; // Also checked to false in projectile hit code, enables external forces to affect the enemy
-            navMeshAgent.enabled = false;
+            DisableEnemy();
         }
     }
 
@@ -36,9 +53,15 @@ public class EnemyExampleAI : MonoBehaviour
     {
         if (other.tag == "PlayerProjectile" || other.tag == "Player")
         {
-            Debug.Log("Enemy hit!");
-            GetComponent<Rigidbody>().isKinematic = false; // Also checked to false in projectile hit code, enables external forces to affect the enemy
-            navMeshAgent.enabled = false;
+            DisableEnemy();
+            
         }
+    }
+
+    private void DisableEnemy()
+    {
+        GetComponentInChildren<Rigidbody>().isKinematic = false; // Also checked to false in projectile hit code, enables external forces to affect the enemy
+        navMeshAgent.enabled = false;
+        gameObject.tag = "Untagged";
     }
 }

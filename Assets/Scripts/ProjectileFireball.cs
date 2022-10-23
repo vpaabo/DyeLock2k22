@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ProjectileFireball : Spell
 {
@@ -23,13 +24,14 @@ public class ProjectileFireball : Spell
             Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
             foreach (Collider hit in colliders)
             {
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                Rigidbody rb = hit.attachedRigidbody;
 
                 if (rb != null)
                 {
                     if (hit.gameObject.tag == "Enemy")
                     {
                         rb.isKinematic = false; // Enables enemy to be affected by external forces
+                        hit.gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disables enemy movement AI if in explosion sphere
                     }
 
                     rb.AddExplosionForce(power, explosionPos, radius, 1.5f);
