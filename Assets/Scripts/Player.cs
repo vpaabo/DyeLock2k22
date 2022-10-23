@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -47,7 +49,14 @@ public class Player : MonoBehaviour
             print(Input.mouseScrollDelta);
 
             int nextSpell= (int) Input.mouseScrollDelta.y;
-            SpellCounter = (Mathf.Abs(SpellCounter + nextSpell)) % spells.Count;
+            if (nextSpell >= 0)
+            {
+                SpellCounter = (SpellCounter + nextSpell) % spells.Count;
+            } else
+            {
+                SpellCounter = (SpellCounter + Mathf.Abs(nextSpell-1)) % spells.Count;
+            }
+            
             Events.SelectSpell(SpellCounter);
 
             print("selected spell" + SpellCounter + SelectedSpell.gameObject.name);
@@ -80,6 +89,15 @@ public class Player : MonoBehaviour
         spell.direction = direction;
         spell.speed = SelectedSpell.speed;
         spell.shooter = gameObject.GetComponentInChildren<Collider>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.attachedRigidbody.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Hit by enemy!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     void shootFireball()

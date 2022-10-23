@@ -26,6 +26,18 @@ public class ProjectileLightningBolt : Spell
     {
         if (c.gameObject.tag != "PlayerProjectile" && c.gameObject.tag != "Player")
         {
+            Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
+            
+            if (rb != null)
+            {
+                if (c.gameObject.tag == "Enemy")
+                {
+                    rb.isKinematic = false; // Enables enemy to be affected by external forces
+                }
+
+                rb.AddForce(direction * 150);
+            }
+            
             GameObject.Destroy(gameObject);
         }
     }
