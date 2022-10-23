@@ -5060,7 +5060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   shooter: {fileID: 0}
-  speed: 5
+  speed: 20
   explosionFX: {fileID: 8256423804974381510, guid: 521bd103a54615b4488ed82eb9e8da7d, type: 3}
 --- !u!135 &5626359958667748690
 SphereCollider:

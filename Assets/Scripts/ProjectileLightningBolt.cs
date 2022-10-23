@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileLightningBolt : MonoBehaviour
+public class ProjectileLightningBolt : Spell
 {
-    public Vector3 direction;
-    public Collider shooter;
-    public float speed;
 
-    private float maxTime = 10;
+    
+    // IN PARENT CLASS
 
-    // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         Physics.IgnoreCollision(shooter, GetComponent<Collider>());
-    }
-
-    // Update is called once per frame
-    void Update()
+    }*/
+    /*void Update()
     {
         if (maxTime <= 0)
         {
@@ -25,12 +20,24 @@ public class ProjectileLightningBolt : MonoBehaviour
         }
         transform.position += speed * direction * Time.deltaTime;
         maxTime -= Time.deltaTime;
-    }
+    }*/
 
     void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.tag != "PlayerProjectile" && c.gameObject.tag != "Player")
         {
+            Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
+            
+            if (rb != null)
+            {
+                if (c.gameObject.tag == "Enemy")
+                {
+                    rb.isKinematic = false; // Enables enemy to be affected by external forces
+                }
+
+                rb.AddForce(direction * 150);
+            }
+            
             GameObject.Destroy(gameObject);
         }
     }
