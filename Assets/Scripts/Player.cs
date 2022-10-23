@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.attachedRigidbody.gameObject.tag == "Enemy")
         {
             Debug.Log("Hit by enemy!");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

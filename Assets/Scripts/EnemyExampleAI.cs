@@ -26,6 +26,7 @@ public class EnemyExampleAI : MonoBehaviour
             navMeshAgent.destination = movementTarget.transform.position;
         } else
         {
+            DisableEnemy();
             if (despawnTimer <= 0)
             {
                 model.transform.localScale -= despawnMod * new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
