@@ -52,8 +52,6 @@ MonoBehaviour:
   - {fileID: 6701596848169493444, guid: 997f5bfc6618c664aa9dc7d30c2933ab, type: 3}
   - {fileID: 1491620386155156329, guid: c4237f291576ff6448598e5fd8369ade, type: 3}
   - {fileID: 7642225154042201166, guid: 8ebd4462381a3b84da7cbeba56dc03bf, type: 3}
-  prefabFireball: {fileID: 6701596848169493444, guid: 997f5bfc6618c664aa9dc7d30c2933ab, type: 3}
-  prefabLightningBolt: {fileID: 1491620386155156329, guid: c4237f291576ff6448598e5fd8369ade, type: 3}
   shotIntervalMax: 0.5
 --- !u!54 &93339484
 Rigidbody:
@@ -67,9 +65,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1001 &562674097830604691
 PrefabInstance:
@@ -88,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5815538042571328695, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
       propertyPath: m_Radius
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5815538042571328695, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
       propertyPath: m_Enabled
@@ -141,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 7924334058807793827, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924334058807793828, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}
+      propertyPath: GroundLayers.m_Bits
+      value: 577
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ba1fc4f563dc424fac53a1340aae80b, type: 3}

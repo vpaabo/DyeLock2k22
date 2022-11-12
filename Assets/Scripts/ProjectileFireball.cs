@@ -34,7 +34,14 @@ public class ProjectileFireball : Spell
                         hit.gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disables enemy movement AI if in explosion sphere
                     }
 
-                    rb.AddExplosionForce(power, explosionPos, radius, 1.5f);
+                    if (hit.gameObject.tag == "Player")
+                    {
+                        Events.AddForceToPlayer(hit.transform.position - explosionPos, power / 1000);
+                    } else
+                    {
+                        rb.AddExplosionForce(power, explosionPos, radius, 1.5f);
+                    }
+                    
                 }
             }
 

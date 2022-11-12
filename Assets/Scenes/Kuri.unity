@@ -1208,13 +1208,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6303900478639809316, guid: 4b02b8216d5dbcd44a8c766ffd519812, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303900478639809323, guid: 4b02b8216d5dbcd44a8c766ffd519812, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b02b8216d5dbcd44a8c766ffd519812, type: 3}

@@ -4862,7 +4862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   shooter: {fileID: 0}
-  speed: 50
+  speed: 30
 --- !u!135 &4243175073561894526
 SphereCollider:
   m_ObjectHideFlags: 0

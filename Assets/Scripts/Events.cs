@@ -19,5 +19,11 @@ public class Events : MonoBehaviour
     public static event Action<int> OnSpellSelected;
     public static void SelectSpell(int spell) => OnSpellSelected?.Invoke(spell);
 
-    
+    // Apply movement force to player (used by explosions etc)
+    public static event Action<Vector3, float> OnAddForceToPlayer;
+    public static void AddForceToPlayer(Vector3 direction, float amount) => OnAddForceToPlayer?.Invoke(direction, amount);
+
+    // Set upgrade availability for player
+    public static event Action<string, bool> OnSetUpgrade;
+    public static void SetUpgrade(string name, bool value) => OnSetUpgrade?.Invoke(name, value);
 }
