@@ -70,7 +70,7 @@ public class EnemyExampleAI : Enemy
         {
             if (attackCurrent <= 0)
             {
-                Debug.Log("Attacking player!");
+                Debug.Log("Attacking player! : " +  damageRed + ", " + damageGreen + ", " + damageBlue);
                 Events.UseResources(damageRed, damageGreen, damageBlue);
                 attackCurrent = attackCooldown;
             }

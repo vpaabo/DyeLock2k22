@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
                 resourceGreen -= SelectedSpell.castCostGreen;
                 resourceBlue -= SelectedSpell.castCostBlue;
                 clampResources(); // This should not be necessary, but is here as failsafe*/
-                Events.UseResources(SelectedSpell.castCostRed, SelectedSpell.castCostGreen, SelectedSpell.castCostBlue);
+                
 
 
                 // Red burst upgrade
@@ -213,6 +213,7 @@ public class Player : MonoBehaviour
                 Events.AddForceToPlayer(direction * -1, 0.25f);
             }
         }
+        Events.UseResources(SelectedSpell.castCostRed, SelectedSpell.castCostGreen, SelectedSpell.castCostBlue);
     }
 
     private void OnTriggerEnter(Collider other)

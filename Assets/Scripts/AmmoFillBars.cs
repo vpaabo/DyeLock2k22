@@ -19,9 +19,9 @@ public class AmmoFillBars : MonoBehaviour
         Events.OnUseResources += UseFill;
         Events.OnSetResources += SetFill;
 
-        redFill = 1;
-        greenFill = 1;
-        blueFill = 1;
+        redFill = 100;
+        greenFill = 100;
+        blueFill = 100;
     }
 
     private void OnDestroy()
@@ -33,6 +33,7 @@ public class AmmoFillBars : MonoBehaviour
 
     public void SetFill(int red, int green, int blue)
     {
+        print("Set resources: " + red + ", " + green + ", " + blue);
         redFill = red;
         greenFill = green;
         blueFill = blue;
@@ -42,22 +43,26 @@ public class AmmoFillBars : MonoBehaviour
 
     public void AddFill(int red, int green, int blue)
     {
+        print("Added resources: " + red + ", " + green + ", " + blue);
         redFill += red;
         greenFill += green;
         blueFill += blue;
+        ChangeFill();
     }
 
     public void UseFill(int red, int green, int blue)
     {
+        print("Used resources: " + red + ", " + green + ", " + blue);
         redFill -= red;
         greenFill -= green;
         blueFill -= blue;
+        ChangeFill();
     }
 
     public void ChangeFill()
     {
-        print("changed fill bar amounts: " + redFill + ", " + greenFill + ", " + blueFill);
-        redFlame.fillAmount = redFill / 100;
+        print("Changed fill bar amounts: " + redFill + ", " + greenFill + ", " + blueFill);
+        redFlame.fillAmount = /*Random.Range(0, 1);*/redFill / 100;
         greenFlame.fillAmount = greenFill / 100;
         blueFlame.fillAmount = blueFill / 100;
     } 

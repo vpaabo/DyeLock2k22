@@ -32,7 +32,7 @@ public class ResourcePickup : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Resources picked up!");
+            Debug.Log("Resources picked up! : " + resourceRed + ", " +  resourceGreen + ", " + resourceBlue);
             Events.AddResources(resourceRed, resourceGreen, resourceBlue);
             GameObject.Destroy(gameObject);
         }
