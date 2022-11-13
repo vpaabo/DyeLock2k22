@@ -26,4 +26,12 @@ public class Events : MonoBehaviour
     // Set upgrade availability for player
     public static event Action<string, bool> OnSetUpgrade;
     public static void SetUpgrade(string name, bool value) => OnSetUpgrade?.Invoke(name, value);
+
+    // Events for affecting player resources
+    public static event Action<int, int, int> OnAddResources;
+    public static void AddResources(int red, int green, int blue) => OnAddResources?.Invoke(red, green, blue);
+    public static event Action<int, int, int> OnUseResources;
+    public static void UseResources(int red, int green, int blue) => OnUseResources?.Invoke(red, green, blue);
+    public static event Action<int, int, int> OnSetResources;
+    public static void SetResources(int red, int green, int blue) => OnSetResources?.Invoke(red, green, blue);
 }

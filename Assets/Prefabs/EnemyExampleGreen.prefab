@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4034009389039439271}
   - component: {fileID: 6833611364297426557}
   m_Layer: 0
-  m_Name: EnemyExample
+  m_Name: EnemyExampleGreen
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,15 +59,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63af7394d3683c54999f2ba8506c2243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthRed: 0
+  healthGreen: 100
+  healthBlue: 0
+  worthRed: 15
+  worthGreen: 5
+  worthBlue: 15
+  damageRed: 5
+  damageGreen: 20
+  damageBlue: 5
   movementTarget: {fileID: 0}
   model: {fileID: 9025076077128290332}
   resourcePickupPrefab: {fileID: 7856719837949233428, guid: 240ec6d742a201b4d93f2ad8ded3645d, type: 3}
-  healthRed: 100
-  healthGreen: 100
-  healthBlue: 100
-  worthRed: 10
-  worthGreen: 10
-  worthBlue: 10
 --- !u!54 &6833611364297426557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -135,6 +138,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: b9ce89bce8dec2741b5a8989c34ec927, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: b9ce89bce8dec2741b5a8989c34ec927, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 339cb20ee4ab68f4d8e9979a90df3922, type: 2}
     - target: {fileID: 919132149155446097, guid: b9ce89bce8dec2741b5a8989c34ec927, type: 3}
       propertyPath: m_Name
       value: player_simple

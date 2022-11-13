@@ -4863,6 +4863,12 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   shooter: {fileID: 0}
   speed: 30
+  castCostRed: 0
+  castCostGreen: 0
+  castCostBlue: 5
+  damageRed: 40
+  damageGreen: 40
+  damageBlue: 200
 --- !u!135 &4243175073561894526
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -4847,3 +4847,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   shooter: {fileID: 0}
   speed: 0
+  castCostRed: 0
+  castCostGreen: 5
+  castCostBlue: 0
+  damageRed: 1
+  damageGreen: 5
+  damageBlue: 1

@@ -30,8 +30,10 @@ public class ProjectileFireball : Spell
                 {
                     if (hit.gameObject.tag == "Enemy")
                     {
-                        rb.isKinematic = false; // Enables enemy to be affected by external forces
-                        hit.gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disables enemy movement AI if in explosion sphere
+                        rb.gameObject.GetComponent<Enemy>().takeDamage(damageRed, damageGreen, damageBlue);
+                        // Leftovers from when shots were instakill
+                        //rb.isKinematic = false; // Enables enemy to be affected by external forces
+                        //hit.gameObject.GetComponent<NavMeshAgent>().enabled = false; // Disables enemy movement AI if in explosion sphere
                     }
 
                     if (hit.gameObject.tag == "Player")

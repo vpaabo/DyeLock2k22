@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class ProjectileLightningBolt : Spell
 {
@@ -32,7 +33,9 @@ public class ProjectileLightningBolt : Spell
             {
                 if (c.gameObject.tag == "Enemy")
                 {
-                    rb.isKinematic = false; // Enables enemy to be affected by external forces
+                    // Leftovers from when shots were instakill
+                    //rb.isKinematic = false; // Enables enemy to be affected by external forces
+                    c.gameObject.GetComponent<Enemy>().takeDamage(damageRed, damageGreen, damageBlue);
                 }
 
                 rb.AddForce(direction * 150);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class ProjectileNatureBlast : Spell
 {
@@ -19,7 +20,9 @@ public class ProjectileNatureBlast : Spell
             {
                 if (other.tag == "Enemy")
                 {
-                    rb.isKinematic = false; // Enables enemy to be affected by external forces
+                    // Leftovers from when shots were instakill
+                    //rb.isKinematic = false; // Enables enemy to be affected by external forces
+                    other.gameObject.GetComponent<Enemy>().takeDamage(damageRed, damageGreen, damageBlue);
                 }
 
                 rb.AddForce(direction * 50);

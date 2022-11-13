@@ -15,9 +15,10 @@ public class Player : MonoBehaviour
     private Spell SelectedSpell;
     private int SpellCounter = 0;
 
-    private int resourceRed = 0;
-    private int resourceGreen = 0;
-    private int resourceBlue = 0;
+    private int resourceCap = 100;
+    private int resourceRed;
+    private int resourceGreen;
+    private int resourceBlue;
 
     public float shotIntervalMax = 0.5f;
     private float shotIntervalCurrent;
@@ -35,6 +36,13 @@ public class Player : MonoBehaviour
         Events.OnSpellSelected += OnSpellSelected;
         Events.OnAddForceToPlayer += OnAddForceToPlayer;
         Events.OnSetUpgrade += OnSetUpgrade;
+        Events.OnAddResources += OnAddResources;
+        Events.OnUseResources += OnUseResources;
+        Events.OnSetResources += OnSetResources;
+
+        resourceRed = resourceCap;
+        resourceGreen = resourceCap;
+        resourceBlue = resourceCap;
 
         // TODO: Temporary solution to give all upgrades.
         // Need to find solution in the future so 'upgrades' dictionary is instantiated with proper boolean values
@@ -51,6 +59,9 @@ public class Player : MonoBehaviour
         Events.OnSpellSelected -= OnSpellSelected;
         Events.OnAddForceToPlayer -= OnAddForceToPlayer;
         Events.OnSetUpgrade -= OnSetUpgrade;
+        Events.OnAddResources -= OnAddResources;
+        Events.OnUseResources -= OnUseResources;
+        Events.OnSetResources -= OnSetResources;
     }
 
     void Start()
@@ -66,6 +77,11 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        if (resourceRed <= 0 && resourceGreen <= 0 && resourceBlue <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        //Debug.Log("R: " + resourceRed.ToString() + "\tG: " + resourceGreen.ToString() + "\tB: " + resourceBlue.ToString());
 
         if (Input.mouseScrollDelta != Vector2.zero && shotBurst == 0)
         {
@@ -92,23 +108,35 @@ public class Player : MonoBehaviour
             shotBurst -= 1;
         } else if (Input.GetMouseButton(0) && shotIntervalCurrent <= 0)
         {
-            shootSpell();
-            shotIntervalCurrent = shotIntervalMax;
-            // Red burst upgrade
-            if (SelectedSpell is ProjectileFireball && shotBurst == 0)
+            if (SelectedSpell.castCostRed <= resourceRed &&
+                SelectedSpell.castCostGreen <= resourceGreen &&
+                SelectedSpell.castCostBlue <= resourceBlue)
             {
-                if (upgrades[Constants.SpellUpgrades.R_BURST_1.ToString()])
+                shootSpell();
+                shotIntervalCurrent = shotIntervalMax;
+
+                resourceRed -= SelectedSpell.castCostRed;
+                resourceGreen -= SelectedSpell.castCostGreen;
+                resourceBlue -= SelectedSpell.castCostBlue;
+                clampResources(); // This should not be necessary, but is here as failsafe
+                
+                // Red burst upgrade
+                if (SelectedSpell is ProjectileFireball && shotBurst == 0)
                 {
-                    if (upgrades[Constants.SpellUpgrades.R_BURST_2.ToString()])
+                    if (upgrades[Constants.SpellUpgrades.R_BURST_1.ToString()])
                     {
-                        shotBurst = 2;
-                    } else
-                    {
-                        shotBurst = 1;
+                        if (upgrades[Constants.SpellUpgrades.R_BURST_2.ToString()])
+                        {
+                            shotBurst = 2;
+                        }
+                        else
+                        {
+                            shotBurst = 1;
+                        }
                     }
+                    shotIntervalBurst = shotIntervalMax / shotBurst;
+                    shotIntervalCurrent += 1;
                 }
-                shotIntervalBurst = shotIntervalMax / shotBurst;
-                shotIntervalCurrent += 1;
             }
         } else
         {
@@ -179,10 +207,9 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody.gameObject.tag == "Enemy")
+        if (other.attachedRigidbody?.gameObject.tag == "Enemy")
         {
             Debug.Log("Hit by enemy!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -206,28 +233,34 @@ public class Player : MonoBehaviour
         bolt.shooter = gameObject.GetComponentInChildren<Collider>();
     }*/
 
-    public int getResourceRed()
+    void clampResources()
     {
-        return resourceRed;
+        resourceRed = Mathf.Clamp(resourceRed, 0, resourceCap);
+        resourceGreen = Mathf.Clamp(resourceGreen, 0, resourceCap);
+        resourceBlue =Mathf.Clamp(resourceBlue, 0, resourceCap);
     }
-    public int getResourceGreen()
+
+    void OnAddResources(int red, int green, int blue)
     {
-        return resourceGreen;
+        resourceRed += red;
+        resourceGreen += green;
+        resourceBlue += blue;
+        clampResources();
     }
-    public int getResourceBlue()
+
+    void OnUseResources(int red, int green, int blue)
     {
-        return resourceBlue;
+        resourceRed -= red;
+        resourceGreen -= green;
+        resourceBlue -= blue;
+        clampResources();
     }
-    public void setResourceRed(int amount)
+
+    void OnSetResources(int red, int green, int blue)
     {
-        resourceRed = amount;
-    }
-    public void setResourceGreen(int amount)
-    {
-        resourceGreen = amount;
-    }
-    public void setResourceBlue(int amount)
-    {
-        resourceBlue = amount;
+        resourceRed = red;
+        resourceGreen = green;
+        resourceBlue = blue;
+        clampResources();
     }
 }
