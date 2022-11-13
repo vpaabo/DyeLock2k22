@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public Camera playerCam;
 
     public List<Spell> spells; // = new List<Spell>()
-    public Dictionary<string, bool> upgrades;
+    public Dictionary<PlayerSkills.SkillType, bool> upgrades;
 
     private Spell SelectedSpell;
     private int SpellCounter = 0;
@@ -46,11 +46,11 @@ public class Player : MonoBehaviour
 
         // TODO: Temporary solution to give all upgrades.
         // Need to find solution in the future so 'upgrades' dictionary is instantiated with proper boolean values
-        upgrades = new Dictionary<string, bool>();
+        upgrades = new Dictionary<PlayerSkills.SkillType, bool>();
         
-        foreach (string name in Enum.GetNames(typeof(Constants.SpellUpgrades)))
+        foreach (PlayerSkills.SkillType name in Enum.GetValues(typeof(PlayerSkills.SkillType)))
         {
-            upgrades[name] = true;
+            upgrades[name] = false;
         }
     }
 
@@ -123,9 +123,9 @@ public class Player : MonoBehaviour
                 // Red burst upgrade
                 if (SelectedSpell is ProjectileFireball && shotBurst == 0)
                 {
-                    if (upgrades[Constants.SpellUpgrades.R_BURST_1.ToString()])
+                    if (upgrades[PlayerSkills.SkillType.R_BURST_1])
                     {
-                        if (upgrades[Constants.SpellUpgrades.R_BURST_2.ToString()])
+                        if (upgrades[PlayerSkills.SkillType.R_BURST_2])
                         {
                             shotBurst = 2;
                         }
@@ -165,9 +165,15 @@ public class Player : MonoBehaviour
         forceIsAffected = true;
     }
 
-    void OnSetUpgrade(string name, bool value)
+    void OnSetUpgrade(PlayerSkills.SkillType skill, bool value)
     {
-        upgrades[name] = value;
+        if (upgrades[skill])
+        {
+            print("already have skill: " + skill);
+            return;
+        }
+        upgrades[skill] = value;
+        print("got upgrade: " + skill);
     }
 
     void OnSpellSelected(int n)
@@ -184,10 +190,10 @@ public class Player : MonoBehaviour
         // Blue speed upgrade
         if (SelectedSpell is ProjectileLightningBolt)
         {
-            if (upgrades[Constants.SpellUpgrades.B_SPEED_1.ToString()])
+            if (upgrades[PlayerSkills.SkillType.B_SPEED_1])
             {
                 speedValue += 10;
-                if (upgrades[Constants.SpellUpgrades.B_SPEED_2.ToString()])
+                if (upgrades[PlayerSkills.SkillType.B_SPEED_2])
                 {
                     speedValue += 10;
                 }
@@ -198,7 +204,7 @@ public class Player : MonoBehaviour
         // Green boost upgrade
         if (SelectedSpell is ProjectileNatureBlast)
         {
-            if (upgrades[Constants.SpellUpgrades.G_BOOST.ToString()] && !characterController.isGrounded)
+            if (upgrades[PlayerSkills.SkillType.G_BOOST] && !characterController.isGrounded)
             {
                 Events.AddForceToPlayer(direction * -1, 0.25f);
             }

@@ -24,8 +24,8 @@ public class Events : MonoBehaviour
     public static void AddForceToPlayer(Vector3 direction, float amount) => OnAddForceToPlayer?.Invoke(direction, amount);
 
     // Set upgrade availability for player
-    public static event Action<string, bool> OnSetUpgrade;
-    public static void SetUpgrade(string name, bool value) => OnSetUpgrade?.Invoke(name, value);
+    public static event Action<PlayerSkills.SkillType, bool> OnSetUpgrade;
+    public static void SetUpgrade(PlayerSkills.SkillType skill, bool value) => OnSetUpgrade?.Invoke(skill, value);
 
     // Events for affecting player resources
     public static event Action<int, int, int> OnAddResources;

@@ -11,8 +11,11 @@ public class PauseMenuButtons : MonoBehaviour
     public Button ExitToMenuButton;
 
     public GameObject PauseScreen;
+    public GameObject SkillScreen;
     public GameObject OtherUI;
     public GameObject PlayerObject;
+
+    
 
     private void Awake()
     {
@@ -21,6 +24,8 @@ public class PauseMenuButtons : MonoBehaviour
 
         Events.OnGamePaused += OnPause;
         Events.OnGameUnPaused += OnUnPause;
+
+        
     }
 
     private void OnDestroy()
@@ -34,14 +39,42 @@ public class PauseMenuButtons : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P) && PauseScreen.activeSelf == false)
         {
             Events.PauseGame();
+            
         }
         else if (Input.GetKeyDown(KeyCode.P) && PauseScreen.activeSelf == true)
         {
             Events.UnPauseGame();
+            
         }
+
+        if (Input.GetKeyDown(KeyCode.K) && SkillScreen.activeSelf == false)
+        {
+            if (PauseScreen.activeSelf == true) return;
+            //Events.PauseGame();
+            Time.timeScale = 0;
+
+            PlayerObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            OtherUI.SetActive(false);
+            SkillScreen.SetActive(true);   
+        }
+        else if (Input.GetKeyDown(KeyCode.K) && SkillScreen.activeSelf == true)
+        {
+            //Events.UnPauseGame();
+            Time.timeScale = 1.0f;
+            PlayerObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            OtherUI.SetActive(true);
+            SkillScreen.SetActive(false);
+        }
+
     }
     public void ContinueButtonPressed()
     {
+        print("continue game");
         Events.UnPauseGame();
     }
     public void OnPause()
@@ -50,8 +83,10 @@ public class PauseMenuButtons : MonoBehaviour
         Time.timeScale = 0;
 
         PlayerObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         OtherUI.SetActive(false);
+        SkillScreen.SetActive(false);
         PauseScreen.SetActive(true);
     }
     public void OnUnPause()
@@ -59,6 +94,8 @@ public class PauseMenuButtons : MonoBehaviour
         print("resume game");
         Time.timeScale = 1.0f;
         PlayerObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         OtherUI.SetActive(true);
         PauseScreen.SetActive(false);
