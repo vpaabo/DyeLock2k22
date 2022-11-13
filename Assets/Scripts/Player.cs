@@ -40,9 +40,10 @@ public class Player : MonoBehaviour
         Events.OnUseResources += OnUseResources;
         Events.OnSetResources += OnSetResources;
 
-        resourceRed = resourceCap;
+        /*resourceRed = resourceCap;
         resourceGreen = resourceCap;
-        resourceBlue = resourceCap;
+        resourceBlue = resourceCap;*/
+        Events.SetResources(resourceCap, resourceCap, resourceCap);
 
         // TODO: Temporary solution to give all upgrades.
         // Need to find solution in the future so 'upgrades' dictionary is instantiated with proper boolean values
@@ -115,11 +116,14 @@ public class Player : MonoBehaviour
                 shootSpell();
                 shotIntervalCurrent = shotIntervalMax;
 
-                resourceRed -= SelectedSpell.castCostRed;
+
+                /*resourceRed -= SelectedSpell.castCostRed;
                 resourceGreen -= SelectedSpell.castCostGreen;
                 resourceBlue -= SelectedSpell.castCostBlue;
-                clampResources(); // This should not be necessary, but is here as failsafe
-                
+                clampResources(); // This should not be necessary, but is here as failsafe*/
+                Events.UseResources(SelectedSpell.castCostRed, SelectedSpell.castCostGreen, SelectedSpell.castCostBlue);
+
+
                 // Red burst upgrade
                 if (SelectedSpell is ProjectileFireball && shotBurst == 0)
                 {
