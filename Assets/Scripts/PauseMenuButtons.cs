@@ -12,7 +12,7 @@ public class PauseMenuButtons : MonoBehaviour
 
     public GameObject PauseScreen;
     public GameObject SkillScreen;
-    public GameObject OtherUI;
+    public GameObject FPS_UI;
     public GameObject PlayerObject;
 
     
@@ -25,7 +25,9 @@ public class PauseMenuButtons : MonoBehaviour
         Events.OnGamePaused += OnPause;
         Events.OnGameUnPaused += OnUnPause;
 
-        
+        PauseScreen.SetActive(false);
+        SkillScreen.SetActive(false);
+        FPS_UI.SetActive(true);
     }
 
     private void OnDestroy()
@@ -56,7 +58,7 @@ public class PauseMenuButtons : MonoBehaviour
             PlayerObject.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            OtherUI.SetActive(false);
+            FPS_UI.SetActive(false);
             SkillScreen.SetActive(true);   
         }
         else if (Input.GetKeyDown(KeyCode.K) && SkillScreen.activeSelf == true)
@@ -67,7 +69,7 @@ public class PauseMenuButtons : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            OtherUI.SetActive(true);
+            FPS_UI.SetActive(true);
             SkillScreen.SetActive(false);
         }
 
@@ -85,7 +87,7 @@ public class PauseMenuButtons : MonoBehaviour
         PlayerObject.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        OtherUI.SetActive(false);
+        FPS_UI.SetActive(false);
         SkillScreen.SetActive(false);
         PauseScreen.SetActive(true);
     }
@@ -97,7 +99,7 @@ public class PauseMenuButtons : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        OtherUI.SetActive(true);
+        FPS_UI.SetActive(true);
         PauseScreen.SetActive(false);
     }
     public void OnExitToMenu()
