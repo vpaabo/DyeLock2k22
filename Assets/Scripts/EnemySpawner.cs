@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public EnemyExampleAI enemyPrefab; // This should be replaced by a superclass in the future
+    public List<EnemyExampleAI> enemyPrefabs; // This should be replaced by a superclass in the future
     public float intervalMin;
     public float intervalMax;
     public GameObject player; // To set as movement target
@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void spawnEnemy()
     {
-        EnemyExampleAI enemy = GameObject.Instantiate<EnemyExampleAI>(enemyPrefab, transform.position, transform.rotation);
+        EnemyExampleAI enemy = GameObject.Instantiate<EnemyExampleAI>(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], transform.position, transform.rotation);
         enemy.movementTarget = player; // TODO: Change to fit generic AI whenever we get to it
     }
 }
