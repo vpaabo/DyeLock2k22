@@ -29,7 +29,7 @@ public class Events : MonoBehaviour
 
     // Events for affecting player resources
     public static event Action<int, int, int> OnAddResources;
-    public static void AddResources(int red, int green, int blue) => OnAddResources?.Invoke(red, green, blue);
+    public static void AddResources(int red, int green, int blue) => OnAddResources?.Invoke(red, green, blue); 
     public static event Action<int, int, int> OnUseResources;
     public static void UseResources(int red, int green, int blue) => OnUseResources?.Invoke(red, green, blue);
     public static event Action<int, int, int> OnSetResources;
