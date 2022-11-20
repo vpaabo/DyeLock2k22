@@ -64,13 +64,14 @@ MonoBehaviour:
   healthBlue: 100
   worthRed: 15
   worthGreen: 15
-  worthBlue: 5
-  damageRed: 5
-  damageGreen: 5
-  damageBlue: 20
+  worthBlue: 15
+  damageRed: 2
+  damageGreen: 2
+  damageBlue: 10
   movementTarget: {fileID: 0}
   model: {fileID: 9025076077128290332}
   resourcePickupPrefab: {fileID: 7856719837949233428, guid: 240ec6d742a201b4d93f2ad8ded3645d, type: 3}
+  attackCooldown: 0.5
 --- !u!54 &6833611364297426557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,8 +225,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 2
+  m_Acceleration: 7
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0

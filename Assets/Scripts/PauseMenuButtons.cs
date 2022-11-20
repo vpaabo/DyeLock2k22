@@ -15,6 +15,9 @@ public class PauseMenuButtons : MonoBehaviour
     public GameObject FPS_UI;
     public GameObject PlayerObject;
 
+
+    public KeyCode pauseButton;
+    public KeyCode skillTreeButton;
     
 
     private void Awake()
@@ -28,6 +31,7 @@ public class PauseMenuButtons : MonoBehaviour
         PauseScreen.SetActive(false);
         SkillScreen.SetActive(false);
         FPS_UI.SetActive(true);
+
     }
 
     private void OnDestroy()
@@ -38,18 +42,18 @@ public class PauseMenuButtons : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && PauseScreen.activeSelf == false)
+        if (Input.GetKeyDown(pauseButton) && PauseScreen.activeSelf == false)
         {
             Events.PauseGame();
             
         }
-        else if (Input.GetKeyDown(KeyCode.P) && PauseScreen.activeSelf == true)
+        else if (Input.GetKeyDown(pauseButton) && PauseScreen.activeSelf == true)
         {
             Events.UnPauseGame();
             
         }
 
-        if (Input.GetKeyDown(KeyCode.K) && SkillScreen.activeSelf == false)
+        if (Input.GetKeyDown(skillTreeButton) && SkillScreen.activeSelf == false)
         {
             if (PauseScreen.activeSelf == true) return;
             //Events.PauseGame();
@@ -61,7 +65,7 @@ public class PauseMenuButtons : MonoBehaviour
             FPS_UI.SetActive(false);
             SkillScreen.SetActive(true);   
         }
-        else if (Input.GetKeyDown(KeyCode.K) && SkillScreen.activeSelf == true)
+        else if (Input.GetKeyDown(skillTreeButton) && SkillScreen.activeSelf == true)
         {
             //Events.UnPauseGame();
             Time.timeScale = 1.0f;
@@ -84,6 +88,7 @@ public class PauseMenuButtons : MonoBehaviour
         print("game paused");
         Time.timeScale = 0;
 
+        
         PlayerObject.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

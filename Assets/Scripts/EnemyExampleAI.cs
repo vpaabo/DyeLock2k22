@@ -21,6 +21,13 @@ public class EnemyExampleAI : Enemy
     private void Awake()
     {
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+
+    }
+    private void Start()
+    {
+        //LeanTween.scaleX(gameObject, 0.9f, 1f).setLoopPingPong(-1);
+        LeanTween.scaleY(gameObject, 0.9f, .5f).setLoopPingPong(-1);
+        //LeanTween.scaleZ(gameObject, 0.9f, 1f).setLoopPingPong(-1);
     }
 
     // Update is called once per frame
