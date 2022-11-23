@@ -59,8 +59,16 @@ public class AmmoFillBars : MonoBehaviour
         ChangeFill();
     }
 
+    void ClampFill()
+    {
+        redFill = Mathf.Clamp(redFill, 0, 100);
+        greenFill = Mathf.Clamp(greenFill, 0, 100);
+        blueFill = Mathf.Clamp(blueFill, 0, 100);
+    }
+
     public void ChangeFill()
     {
+        ClampFill();
         print("Changed fill bar amounts: " + redFill + ", " + greenFill + ", " + blueFill);
         redFlame.fillAmount = /*Random.Range(0, 1);*/redFill / 100;
         greenFlame.fillAmount = greenFill / 100;
