@@ -896,7 +896,7 @@ PrefabInstance:
     - target: {fileID: 6518264988749495565, guid: daf56897b46e76b43b659533e75707f3, type: 3}
       propertyPath: FPS_UI
       value: 
-      objectReference: {fileID: 1396987850}
+      objectReference: {fileID: 0}
     - target: {fileID: 6518264988749495565, guid: daf56897b46e76b43b659533e75707f3, type: 3}
       propertyPath: PlayerObject
       value: 
@@ -5777,11 +5777,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3319550637523001542, guid: cc2d978bc082cc64ca3091aa9cf368f7, type: 3}
   m_PrefabInstance: {fileID: 1279821723}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1396987850 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1044093237175232818, guid: daf56897b46e76b43b659533e75707f3, type: 3}
-  m_PrefabInstance: {fileID: 147331043}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1405210774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8851,7 +8846,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
