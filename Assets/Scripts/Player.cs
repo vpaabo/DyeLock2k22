@@ -121,26 +121,7 @@ public class Player : MonoBehaviour
                 resourceGreen -= SelectedSpell.castCostGreen;
                 resourceBlue -= SelectedSpell.castCostBlue;
                 clampResources(); // This should not be necessary, but is here as failsafe*/
-                
 
-
-                // Red burst upgrade
-                if (SelectedSpell is ProjectileFireball && shotBurst == 0)
-                {
-                    if (upgrades[PlayerSkills.SkillType.R_BURST_1])
-                    {
-                        if (upgrades[PlayerSkills.SkillType.R_BURST_2])
-                        {
-                            shotBurst = 2;
-                        }
-                        else
-                        {
-                            shotBurst = 1;
-                        }
-                    }
-                    shotIntervalBurst = shotIntervalMax / shotBurst;
-                    shotIntervalCurrent += 1;
-                }
             }
         } else
         {
@@ -191,6 +172,27 @@ public class Player : MonoBehaviour
         Spell spell = GameObject.Instantiate<Spell>(SelectedSpell, playerCam.transform.position - new Vector3(0, 0.25f, 0) + direction, transform.rotation);
         spell.direction = direction;
         float speedValue = SelectedSpell.speed;
+
+
+        // Red burst upgrade
+        if (SelectedSpell is ProjectileFireball && shotBurst == 0)
+        {
+            if (upgrades[PlayerSkills.SkillType.R_BURST_1])
+            {
+                if (upgrades[PlayerSkills.SkillType.R_BURST_2])
+                {
+                    shotBurst = 2;
+                }
+                else
+                {
+                    shotBurst = 1;
+                }
+            }
+            shotIntervalBurst = shotIntervalMax / shotBurst;
+            shotIntervalCurrent += 1;
+        }
+
+
         // Blue speed upgrade
         if (SelectedSpell is ProjectileLightningBolt)
         {
@@ -205,6 +207,8 @@ public class Player : MonoBehaviour
         }
         spell.speed = speedValue;
         spell.shooter = gameObject.GetComponentInChildren<Collider>();
+
+
         // Green boost upgrade
         if (SelectedSpell is ProjectileNatureBlast)
         {
