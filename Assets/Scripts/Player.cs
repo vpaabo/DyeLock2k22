@@ -171,13 +171,13 @@ public class Player : MonoBehaviour
 
     void OnSetUpgrade(PlayerSkills.SkillType skill, bool value)
     {
-        if (upgrades[skill])
+        if (upgrades[skill] && value)
         {
             print("already have skill: " + skill);
             return;
         }
         upgrades[skill] = value;
-        print("got upgrade: " + skill);
+        print("set upgrade: " + skill + " to " + value);
     }
 
     void OnSpellSelected(int n)

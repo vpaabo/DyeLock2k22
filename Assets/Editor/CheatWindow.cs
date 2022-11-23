@@ -17,8 +17,6 @@ public class CheatWindow : EditorWindow
         EditorWindow.GetWindow(typeof(CheatWindow));
     }
 
-    // TODO: How to call event on button toggle?
-
     private void Awake()
     {
         allSkills = new List<SkillType>();
