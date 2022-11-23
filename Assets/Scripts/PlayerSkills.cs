@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSkills
 {
+    // Kui paned uue skilli siis pane siia sellele nimi ka
     public enum SkillType
     {
         /*
@@ -37,6 +39,16 @@ public class PlayerSkills
         B_SPEED_2 = 3012
     }
 
+    // Kui paned uue skilli siis pane siia sellele nimi ka
+    public static Dictionary<PlayerSkills.SkillType, string> SkillNames = new Dictionary<SkillType, string>()
+    {
+        { SkillType.R_BURST_1, "punane 1"},
+        { SkillType.R_BURST_2, "punane 2"},
+        { SkillType.G_BOOST, "roheline 1"},
+        { SkillType.B_SPEED_1, "sinine 1"},
+        { SkillType.B_SPEED_2, "sinine 2"},
+
+    };
     private List<SkillType> unlockedSkills;
 
     public PlayerSkills()
@@ -53,5 +65,10 @@ public class PlayerSkills
     public bool isSkillUnlocked(SkillType skill)
     {
         return unlockedSkills.Contains(skill);
+    }
+
+    public static string GetSkillName(SkillType skill)
+    {
+        return SkillNames.GetValueOrDefault(skill, "NO NAME YET");
     }
 }

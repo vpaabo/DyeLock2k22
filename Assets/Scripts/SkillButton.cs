@@ -16,7 +16,7 @@ public class SkillButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(AddSkill);
-        button.GetComponentInChildren<TextMeshProUGUI>().text = Skill.ToString();
+        button.GetComponentInChildren<TextMeshProUGUI>().text = PlayerSkills.GetSkillName(Skill);
         button.GetComponentInChildren<TextMeshProUGUI>().fontSize = 15;
     }
 
